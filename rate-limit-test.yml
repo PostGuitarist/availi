@@ -1,0 +1,21 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 10
+      arrivalRate: 10  # 10 requests per second = 600 per minute (exceeds our 60/min limit)
+  defaults:
+    headers:
+      User-Agent: "Artillery/rate-limit-test"
+
+scenarios:
+  - flow:
+      - get:
+          url: "/api/test-rate-limit"
+          capture:
+            - header: "X-RateLimit-Remaining"
+              as: "remaining"
+          afterResponse: "logRateLimit"
+
+functions:
+  logRateLimit:
+    - log: "Remaining: {{ remaining }}"

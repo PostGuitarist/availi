@@ -3,8 +3,10 @@
 import { revalidatePath } from "next/cache"
 import { nanoid } from "nanoid"
 import { sql } from "@/lib/db"
+import { withActionRateLimit, RATE_LIMIT_CONFIG } from "@/lib/rate-limit"
 
-export async function createMeeting({
+// Original createMeeting function
+async function _createMeeting({
   title,
   description,
   dateRange,
@@ -41,7 +43,8 @@ export async function createMeeting({
   }
 }
 
-export async function getMeeting(id: string) {
+// Original getMeeting function
+async function _getMeeting(id: string) {
   try {
     // Get the meeting from the database
     const meeting = await sql`
@@ -79,7 +82,8 @@ export async function getMeeting(id: string) {
   }
 }
 
-export async function addParticipant({
+// Original addParticipant function
+async function _addParticipant({
   meetingId,
   name,
   availability,
@@ -123,7 +127,8 @@ export async function addParticipant({
   }
 }
 
-export async function updateAvailability({
+// Original updateAvailability function
+async function _updateAvailability({
   meetingId,
   participantId,
   availability,
@@ -168,4 +173,25 @@ export async function updateAvailability({
     }
   }
 }
+
+// Apply rate limits to the server actions
+export const createMeeting = withActionRateLimit(_createMeeting, {
+  limit: RATE_LIMIT_CONFIG.SERVER_ACTIONS.CREATE.LIMIT,
+  windowInSeconds: RATE_LIMIT_CONFIG.SERVER_ACTIONS.CREATE.WINDOW_SECONDS,
+})
+
+export const getMeeting = withActionRateLimit(_getMeeting, {
+  limit: RATE_LIMIT_CONFIG.SERVER_ACTIONS.READ.LIMIT,
+  windowInSeconds: RATE_LIMIT_CONFIG.SERVER_ACTIONS.READ.WINDOW_SECONDS,
+})
+
+export const addParticipant = withActionRateLimit(_addParticipant, {
+  limit: RATE_LIMIT_CONFIG.SERVER_ACTIONS.CREATE.LIMIT,
+  windowInSeconds: RATE_LIMIT_CONFIG.SERVER_ACTIONS.CREATE.WINDOW_SECONDS,
+})
+
+export const updateAvailability = withActionRateLimit(_updateAvailability, {
+  limit: RATE_LIMIT_CONFIG.SERVER_ACTIONS.UPDATE.LIMIT,
+  windowInSeconds: RATE_LIMIT_CONFIG.SERVER_ACTIONS.UPDATE.WINDOW_SECONDS,
+})
 

@@ -4,6 +4,22 @@ export async function runMigrations() {
   try {
     console.log("Running database migrations...")
 
+    // Add audit logging
+    await sql`
+      CREATE TABLE IF NOT EXISTS migration_logs (
+        id SERIAL PRIMARY KEY,
+        executed_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+        status TEXT NOT NULL,
+        details TEXT
+      )
+    `
+
+    // Log migration start
+    await sql`
+      INSERT INTO migration_logs (status, details)
+      VALUES ('STARTED', 'Starting database migration')
+    `
+
     // Drop existing tables if they exist (for clean migration)
     await sql`
       DROP TABLE IF EXISTS availability CASCADE;
@@ -39,11 +55,44 @@ export async function runMigrations() {
       CREATE INDEX IF NOT EXISTS idx_participants_meeting_id ON participants(meeting_id);
     `
 
-    console.log("Migrations completed successfully")
-    return { success: true }
+    // Create a table to track API usage for additional rate limiting
+    await sql`
+      CREATE TABLE IF NOT EXISTS api_usage (
+        id SERIAL PRIMARY KEY,
+        client_ip VARCHAR(45), 
+        endpoint VARCHAR(255) NOT NULL,
+        request_count INTEGER DEFAULT 1,
+        last_request TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(client_ip, endpoint)
+      )
+    `
+
+    // Log successful migration
+    await sql`
+      INSERT INTO migration_logs (status, details)
+      VALUES ('COMPLETED', 'Database migration completed successfully')
+    `
+
+    return {
+      success: true,
+    }
   } catch (error) {
     console.error("Migration error:", error)
-    return { success: false, error }
+    
+    // Log failed migration
+    try {
+      await sql`
+        INSERT INTO migration_logs (status, details)
+        VALUES ('FAILED', ${String(error)})
+      `
+    } catch (logError) {
+      console.error("Failed to log migration error:", logError)
+    }
+    
+    return {
+      success: false,
+      error,
+    }
   }
 }
 

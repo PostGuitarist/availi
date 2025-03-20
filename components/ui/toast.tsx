@@ -6,6 +6,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { toast } from "sonner"
 
 const ToastProvider = ToastPrimitives.Provider
 
@@ -111,6 +112,13 @@ const ToastDescription = React.forwardRef<
   />
 ))
 ToastDescription.displayName = ToastPrimitives.Description.displayName
+
+// Add a new utility function to show rate limit errors
+export function showRateLimitToast() {
+  return toast.error("Rate limit exceeded", {
+    description: "You've made too many requests. Please try again later.",
+  })
+}
 
 type ToastProps = React.ComponentPropsWithoutRef<typeof Toast>
 
