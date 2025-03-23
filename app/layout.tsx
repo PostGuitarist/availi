@@ -12,6 +12,11 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Availi - Find the Perfect Meeting Time",
   description: "A modern meeting scheduler that helps you find the best time to meet with everyone.",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+  },
 }
 
 export default function RootLayout({
