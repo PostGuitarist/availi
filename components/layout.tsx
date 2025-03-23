@@ -2,6 +2,7 @@ import type React from "react"
 import Link from "next/link"
 import { Clock } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
+import Image from "next/image"
 
 interface LayoutProps {
   children: React.ReactNode
@@ -13,7 +14,13 @@ export default function Layout({ children }: LayoutProps) {
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center">
           <Link href="/" className="flex items-center gap-2 font-bold text-xl">
-            <Clock className="h-6 w-6 text-primary" />
+            <Image
+              src="/favicon.svg"
+              alt="Logo"
+              width={24}
+              height={24}
+              className="rounded-full sm:block"
+            />
             <span>Availi</span>
           </Link>
           <nav className="ml-auto flex gap-4 sm:gap-6 items-center">
@@ -31,7 +38,13 @@ export default function Layout({ children }: LayoutProps) {
       <footer className="border-t py-6 md:py-0">
         <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
           <div className="flex items-center gap-2 text-sm">
-            <Clock className="h-4 w-4 text-primary" />
+            <Image
+              src="/favicon.svg"
+              alt="Logo"
+              width={22}
+              height={22}
+              className="rounded-full sm:block"
+            />
             <p>© 2025 Availi. All rights reserved.</p>
           </div>
           <div className="flex gap-4">
