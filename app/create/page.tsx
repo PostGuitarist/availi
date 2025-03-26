@@ -18,6 +18,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { createMeeting } from "@/app/actions"
 import { DateRangePicker } from "@/components/date-range-picker"
 import Layout from "@/components/layout"
+import { toast } from "@/lib/toast"
 
 export default function CreateMeetingPage() {
   const router = useRouter()
@@ -132,7 +133,23 @@ export default function CreateMeetingPage() {
                       <div className="flex items-center space-x-2">
                         <Clock className="h-4 w-4 text-muted-foreground" />
                         <span>From</span>
-                        <Select value={startTime} onValueChange={setStartTime}>
+                        <Select
+                          value={startTime}
+                          onValueChange={(value) => {
+                            const newStartHour = Number.parseInt(value.split(":")[0], 10)
+                            const endHour = Number.parseInt(endTime.split(":")[0], 10)
+
+                            setStartTime(value)
+
+                            if (endHour < newStartHour) {
+                              // If the new start time is later than the current end time, adjust end time
+                              setEndTime(value)
+                              toast.warning("Time range adjusted", {
+                                description: "End time has been adjusted to match the new start time.",
+                              })
+                            }
+                          }}
+                        >
                           <SelectTrigger className="w-[120px]">
                             <SelectValue placeholder="Start Time">{formatTime12h(startTime)}</SelectValue>
                           </SelectTrigger>
@@ -145,7 +162,23 @@ export default function CreateMeetingPage() {
                           </SelectContent>
                         </Select>
                         <span>to</span>
-                        <Select value={endTime} onValueChange={setEndTime}>
+                        <Select
+                          value={endTime}
+                          onValueChange={(value) => {
+                            const startHour = Number.parseInt(startTime.split(":")[0], 10)
+                            const endHour = Number.parseInt(value.split(":")[0], 10)
+
+                            if (endHour < startHour) {
+                              // If end time is earlier than start time, set end time to start time
+                              setEndTime(startTime)
+                              toast.warning("Invalid time range", {
+                                description: "End time cannot be earlier than start time. End time has been adjusted.",
+                              })
+                            } else {
+                              setEndTime(value)
+                            }
+                          }}
+                        >
                           <SelectTrigger className="w-[120px]">
                             <SelectValue placeholder="End Time">{formatTime12h(endTime)}</SelectValue>
                           </SelectTrigger>
