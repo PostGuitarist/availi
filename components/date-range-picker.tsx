@@ -20,6 +20,10 @@ interface DateRangePickerProps {
 export function DateRangePicker({ dateRange, onDateRangeChange, className, maxDays = 7 }: DateRangePickerProps) {
   const [isOpen, setIsOpen] = useState(false)
 
+  // Create a Date object for today to disable past dates
+  const today = new Date()
+  today.setHours(0, 0, 0, 0) // Set to beginning of the day for accurate comparison
+
   // Handle date selection with max days limit
   const handleSelect = (range: DateRange | undefined) => {
     if (!range?.from) {
@@ -82,10 +86,9 @@ export function DateRangePicker({ dateRange, onDateRangeChange, className, maxDa
               // Removed auto-closing behavior to keep calendar open until manually closed
             }}
             numberOfMonths={2}
+            disabled={{ before: today }} // Disable all dates before today
             footer={
-              <p className="text-xs text-center text-muted-foreground pt-2 pb-1">
-                Select a maximum of {maxDays} days
-              </p>
+              <p className="text-xs text-center text-muted-foreground pt-2 pb-1">Select a maximum of {maxDays} days</p>
             }
           />
         </PopoverContent>
