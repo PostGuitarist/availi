@@ -18,7 +18,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { createMeeting } from "@/app/actions"
 import { DateRangePicker } from "@/components/date-range-picker"
 import Layout from "@/components/layout"
-import { toast } from "@/lib/toast"
+import { toast } from "sonner"
 
 export default function CreateMeetingPage() {
   const router = useRouter()

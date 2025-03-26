@@ -2,10 +2,10 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Share2, Mail, Copy, Facebook, Twitter, Linkedin, Check } from "lucide-react"
+import { Share2, Mail, Facebook, Twitter, Linkedin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { toast } from "@/lib/toast"
+import { toast } from "sonner"
 
 interface ShareMenuProps {
   title: string
