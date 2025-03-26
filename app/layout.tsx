@@ -3,9 +3,9 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { SonnerProvider } from "@/components/sonner-provider"
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Analytics } from "@vercel/analytics/react"
+import { ToasterWithTheme } from "@/components/toast-with-theme"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -29,7 +29,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider defaultTheme="light">
           {children}
-          <SonnerProvider />
+          <ToasterWithTheme />
         </ThemeProvider>
         <Analytics />
       </body>
@@ -37,7 +37,3 @@ export default function RootLayout({
     </html>
   )
 }
-
-
-
-import './globals.css'
