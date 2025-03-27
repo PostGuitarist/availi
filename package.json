@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
@@ -47,7 +48,8 @@
     "embla-carousel-react": "8.5.1",
     "framer-motion": "latest",
     "input-otp": "1.4.1",
-    "lodash": "latest",
+    "loadash": "^1.0.0",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.454.0",
     "nanoid": "latest",
     "next": "^15.2.4",
@@ -61,10 +63,11 @@
     "sonner": "latest",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
+    "turbo": "^2.4.4",
     "vaul": "^0.9.9"
   },
   "devDependencies": {
-    "@types/node": "^22.13.13",
+    "@types/node": "^22.13.14",
     "@types/react": "19.0.11",
     "@types/react-dom": "19.0.4",
     "postcss": "^8.5.3",
@@ -80,5 +83,5 @@
       "sharp"
     ]
   },
-  "packageManager": "pnpm@10.6.4+sha512.da3d715bfd22a9a105e6e8088cfc7826699332ded60c423b14ec613a185f1602206702ff0fe4c438cb15c979081ce4cb02568e364b15174503a63c7a8e2a5f6c"
+  "packageManager": "bun@1.2.6"
 }
