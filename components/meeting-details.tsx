@@ -47,7 +47,7 @@ export default function MeetingDetails({ meeting: initialMeeting }: MeetingDetai
       const updatedMeeting = await getMeeting(meeting.id)
       if (updatedMeeting) {
         setMeeting(updatedMeeting)
-        toast.success("Data refreshed", {
+        toast.info("Data refreshed", {
           description: "Meeting data has been updated with the latest information.",
         })
       }
