@@ -10,6 +10,7 @@ export function ToasterWithTheme() {
     <Toaster 
       position="bottom-right" 
       richColors 
+      closeButton
       className="toaster group" 
       theme={theme as "light" | "dark" | "system"} 
     />
