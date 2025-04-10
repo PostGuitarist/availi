@@ -33,7 +33,7 @@ export default function RootLayout({
         </ThemeProvider>
         <Analytics />
       </body>
-      <GoogleAnalytics gaId="G-XQRZ5FR5X7" />
+      <GoogleAnalytics gaId={`${process.env.GA_TRACKING_ID}`} />
     </html>
   )
 }

@@ -36,13 +36,13 @@ The application includes rate limiting to protect against abuse:
 - Adding participants: Limited to 20 participants per minute
 - Updating availability: Limited to 30 updates per minute
 
-Rate limiting helps protect your application from excessive usage and potential denial of service attacks.
+### TODO / Future Improvement Ideas
 
-### Production Considerations
-
-For production environments, consider replacing the in-memory rate limiter with a distributed solution:
-
-1. Add Redis for distributed rate limiting across multiple server instances
-2. Implement IP-based blocking for repeat offenders
-3. Set up monitoring and alerts for unusual traffic patterns
+- Implement IP-based blocking for repeat offenders
+- Set up monitoring and alerts for unusual traffic patterns
+- Consider using a third-party service for advanced rate limiting and security features
+- Implement logging for rate-limited requests
+- Add a dashboard to monitor rate-limited requests and user behavior
+- Consider implementing a CAPTCHA for certain endpoints to prevent automated abuse
+- Implement user authentication and authorization to restrict access to certain endpoints
 
