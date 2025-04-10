@@ -24,6 +24,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const GA_ID = process.env.NEXT_PUBLIC_GA_ID ? process.env.NEXT_PUBLIC_GA_ID : "G-XXXXXXXXXX"
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
@@ -33,7 +35,7 @@ export default function RootLayout({
         </ThemeProvider>
         <Analytics />
       </body>
-      <GoogleAnalytics gaId={`${process.env.GA_TRACKING_ID}`} />
+      <GoogleAnalytics gaId={`${GA_ID}`} />
     </html>
   )
 }
