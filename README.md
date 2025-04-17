@@ -1,5 +1,16 @@
 # Availi - Meeting Scheduler
 
+## Overview
+
+Availi is a meeting scheduling application that allows users to create meetings, add participants, and check availability. It uses a PostgreSQL database hosted on Neon and provides a RESTful API for interaction.
+
+## Tech Stack
+- Next.js 15 - React 19
+- PostgreSQL (Neon) - DB
+- Tailwind CSS - Styling 
+- Shadcn UI - Components
+- Framer Motion - Animations
+
 ## Database Setup
 
 This application uses a Neon PostgreSQL database. Follow these steps to set up your database:
@@ -24,17 +35,28 @@ Make sure you have the following environment variable set:
 DATABASE_URL=your_neon_database_connection_string
 ```
 
-## Security Features
 
-### Rate Limiting
 
-The application includes rate limiting to protect against abuse:
 
-- API endpoints: Limited to 60 requests per minute
-- Database setup endpoint: Limited to 5 requests per minute
-- Creating meetings: Limited to 10 meetings per minute
-- Adding participants: Limited to 20 participants per minute
-- Updating availability: Limited to 30 updates per minute
+<br />
+<br />
+<br />
+<br />
+
+## Feature Overview
+- **Create Meetings**: Users can create meetings and add participants.
+- **Check Availability**: Users can check the availability of participants for a specific time slot.
+- **Rate Limiting**: The application implements rate limiting to prevent abuse and ensure fair usage.
+- **Error Handling**: The application handles errors gracefully and provides meaningful error messages to users.
+- **Responsive Design**: The application is designed to be responsive and works well on both desktop and mobile devices.
+- **User-Friendly UI**: The application uses Tailwind CSS and Shadcn UI for a modern and user-friendly interface.
+- **Animations**: The application uses Framer Motion for smooth animations and transitions.
+- **PostgreSQL Database**: The application uses a PostgreSQL database hosted on Neon for data storage.
+
+<br />
+<br />
+<br />
+<br />
 
 ### TODO / Future Improvement Ideas
 
