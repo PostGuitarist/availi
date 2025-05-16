@@ -4,7 +4,7 @@
 
 Availi is a meeting scheduling application that allows users to create meetings, add participants, and check availability. It uses a PostgreSQL database hosted on Neon and provides a RESTful API for interaction.
 
-**This project was made in part to test the UI design capabilities of Vercel's v0, for initial design testing for small components in [SwiftSeg](https://github.com/swiftseg). Only ~15% of the UI design was made by v0.**
+**This project was made partly to test the UI design capabilities of Vercel's v0, for initial design testing for small components in [SwiftSeg](https://github.com/swiftseg). Only ~15% of the UI design was made by v0.**
 
 ## Tech Stack
 - Next.js 15 - React 19
@@ -19,7 +19,7 @@ This application uses a Neon PostgreSQL database. Follow these steps to set up y
 
 ### Option 1: Automatic Setup (Recommended)
 
-1. Make sure your Neon database connection string is set as the `DATABASE_URL` environment variable.
+1. Ensure your Neon database connection string is set as the `DATABASE_URL` environment variable.
 2. Visit `/api/setup-db` in your browser or make a GET request to this endpoint to automatically run the migrations.
 
 ### Option 2: Manual Setup
